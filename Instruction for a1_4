@@ -1,0 +1,55 @@
+Instruction for a1_4
+
+The code has 5 parts and must be run in order.
+
+4.1 report counts
+
+Read files into a list sentence by sentence first. Remember to change direction.
+Add <s>/START <e>/END, replace duplicate spaces and \n to single space.
+
+Combine the input data into a whole string and split by space to get the list of word_tag.
+
+Generate word list from word_tag list and count words. 
+Replace words occuring less than 5 times with UNK in word list and word_tag list.
+Count the word and word_tag.
+Generate tag list and bi_tag list and count them.
+Output word_tag counts, tag counts and bi_tag counts. The output file will be in the same file with the pynb.
+
+
+
+4.2 transition probabilities of the training set
+
+Use add_0.1 smoothing to calculate the transition probability and report smoothed transition probability.
+
+Create transition probability in another format for later convenience.
+
+Calculate the unsmoothed transition probability for random sentences generation.
+
+
+
+4.3 emission probabilities of the training set
+
+Create word_tag count in another format for later convenience.
+
+Use add_0.1 smoothing to calculate the emission probability and create a version with different format for report. Note that the output file will be large as it contains the 474 * 13000 word_tag pairs and their probabilities. 
+
+Calculate the unsmoothed emission probability for random sentences generation.
+
+
+
+4.4 Generate 5 random sentences
+
+Senences are generated randomly from bi_tag and tag_words using unsmoothed transition and emission probability, because the smoothed ones have all possible pairs and the sentences randomly generated may have much lower probabilities.
+
+The randomly generated sentences and their probabilities are printed directly.
+
+
+
+4.5 derive the most probable POS tag sequence using the Viterbi algorithm
+
+Read test files first and convert it into a list so that all the sentences can be run in a loop.
+
+Use Viterbi algorithm to calculate the best path(most possible POS tag sequence), based on the smoothed transition and emission probabilities. For the words only exists in test file, regards it as <UNK>. This step will cost about 15 minutes. You can choose to print(i) to see the progress. 
+
+The best path is the most probable POStag senquence. Return best path for each sentence.
+Output file will be in the same direction of the pynb.
